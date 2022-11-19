@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--<link rel="stylesheet" href="index.css">-->
+    <title>Text Classification</title></head>
+<body>
+    <center>
+    <h2>Choose Your Image</h2>
+    <form method="post">
+<p><input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" ></p>
+<p><label for"file" style="cursor: pointer;">Upload image</label></p>
+<p><img id="output" width="200"/></p>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br><h4><b>Result : {{ prediction_text }}</b></h4>
+<br>
+</center>
+<script>
+var loadFile=function(event)
+{
+var image=document.getElementById('output');
+image.src=URL.createObjectURL(event.target.files[0]);
+};
+</script>
+
+</body>
+
+<style>
+body{
+    background-color: powderblue;
+    background-image: url("https://www.google.com/imgres?imgurl=https://biederer.org/wp-content/uploads/login-page-bg.jpg&imgrefurl=https://biederer.org/login-page-bg/&tbnid=Kpfy8vfuOZ4XFM&vet=1&docid=1u-xPJk6T6qwQM&w=1707&h=1280&hl=en&source=sh/x/im");
+    }
+h2{
+    border: 2px solid;
+    margin: 50px;
+    width: 300px;
+}
+p{
+    display: block;
+}
+
+</style>
+
+</html>
