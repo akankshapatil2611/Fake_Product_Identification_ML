@@ -1,3 +1,4 @@
+# & "f:/Fake Product Identification Project/new_environment/Scripts/Activate.ps1"
 import numpy as np
 from flask import Flask, request, jsonify, render_template
 from PIL import Image
@@ -5,8 +6,8 @@ import pytesseract
 import pandas as pd
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
-from waitress import serve
-from gevent.pywsgi import WSGIServer
+#from waitress import serve
+#from gevent.pywsgi import WSGIServer
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
