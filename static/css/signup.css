@@ -1,0 +1,68 @@
+body
+{
+	
+	font-family: 'Poppins', sans-serif;
+	color: #fff;
+	background: grey;
+	background-size: cover;
+}
+.signup
+{
+	background: black;
+	padding: 40px;
+	width: 300px;
+	margin: auto;
+	margin-top: 80px;
+	height: 550px;
+	margin-left: 180px;
+	margin: 0 auto;
+	margin-top: 90px;
+}
+form
+{
+	width: 290px;
+	text-align: center;
+}
+input
+{
+	width: 290px;
+	height: 60px;
+	text-align: center;
+	background: white;
+	border: none;
+	border-radius: 6px;
+	border-bottom: 1px solid #fff;
+	font-family: 'Play' , sans-serif;
+	font-size: 16px;
+	font-weight: 200px;
+	padding: 10px 0;
+	transition: border 0.5s;
+	outline: none;
+	color: black;
+}
+input[type=button]
+{
+	border: none;
+	width: 190px;
+	background: gry;
+	color: black;
+	font-size: 16px;
+	line-height: 25px;
+	padding: 10px 0;
+	border-radius: 15px;
+	cursor: pointer;
+}
+input[type=button]:hover
+{
+	color: #fff;
+	background-color: black;
+}
+h2
+{
+	color: white;
+}
+::placeholder{
+	color: black;
+	opacity: 0.8;
+}
+

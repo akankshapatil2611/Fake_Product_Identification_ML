@@ -5,9 +5,8 @@ from PIL import Image
 import pytesseract
 import pandas as pd
 import pickle
+import rds_db as db
 from sklearn.feature_extraction.text import CountVectorizer
-#from waitress import serve
-#from gevent.pywsgi import WSGIServer
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
@@ -17,7 +16,7 @@ model = pickle.load(open("model.pkl", "rb"))
 
 @app.route("/")
 def Home():
-    return render_template("main.html")
+    return render_template("Registration.html")
 
 @app.route("/textdetect")
 def text():
@@ -63,6 +62,33 @@ def reviewfetchData():
     #return render_template("ReviewDetection.html", prediction= "{}".format(m))
     return jsonify(m)
 
+@app.route('/login', methods=['post'])
+def loginuser():
+    name = request.form['name']
+    passwd = request.form['passwd']
+    account = db.get_details(name, passwd)
+    print(account, type(account))
+    if not account:
+        msg = 'Incorrect username / password !'
+        return render_template('Registration.html', check = "{}".format(msg))
+    elif account[0]==name and account[1]==passwd:
+        msg = "Login Successful"
+        return render_template('main.html')
+    
+    print(msg)
+    
+
+@app.route('/insert',methods = ['post'])
+def insert():
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        passwd = request.form['pass']
+        cpasswd = request.form['cpass']
+        db.insert_details(name,email,phone, passwd, cpasswd)
+        return render_template('Registration.html')
 
 if __name__ == "__main__":
     #http_server = WSGIServer(('', 5000), app)
