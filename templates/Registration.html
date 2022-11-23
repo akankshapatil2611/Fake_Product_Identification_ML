@@ -16,11 +16,12 @@
     <div class="login form">
       <header>Login</header>
       <form action="/login" method="post">
-        <input type="text" placeholder="Enter Username" name="name">
-        <input type="password" placeholder="Enter password" name="passwd">
+        <input type="text" placeholder="Enter Username" name="name" required>
+        <input type="password" placeholder="Enter password" name="passwd" required>
         <input type="submit" class="button" value="Login" name="loginu">
-        <br><h4><b>{{ check }}</b></h4>
+        <center><h4><b style="color:white">{{ check }}</b></h4></center>
       </form>
+      <br>
       <div class="signup">
         <span class="signup">Don't have an account?
          <label for="check">Signup</label>
@@ -30,15 +31,15 @@
     <div class="registration form">
       <header>Register</header>
       <form action="/insert" method="post">
-        <input type="text" placeholder="Enter Name" name="name">  
-        <input type="text" placeholder="Enter Email" name="email">
-        <input type="text" placeholder="Enter Phone Number" name="phone"> 
-        <input type="password" placeholder="Create a password" name="pass">
-        <input type="password" placeholder="Confirm your password" name="cpass">
-        <input type="submit" class="button" value="Register" name="submit">
+        <input type="text" placeholder="Enter Name" name="name" required>  
+        <input type="email" placeholder="Enter Email" name="email" required>
+        <input type="text" placeholder="Enter Phone Number" name="phone" required> 
+        <input type="password" placeholder="Create a password" name="pass" required>
+        <input type="password" placeholder="Confirm your password" name="cpass" required>
+        <input type="submit" class="button" value="Register" name="submit" onclick="myFunction()">
       </form>
      
-     
+      
       <div class="signup">
         <span class="signup">Already have an account?
          <label for="check">Login</label>
@@ -46,6 +47,52 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function myFunction(){
+      var name=document.form.name.value
+      //var lname=document.form.username1.value
+      var pass=document.form.pass.value
+      var pass1=document.form.cpass.value
+      var mail=document.form.email.value
+      re1 = /^[\()]?([a-z]{1,15})$/
+      re2 = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+      re3 = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+      var count=0
+      if(re1.test(name))
+      {
+        count++
+      }
+      else
+      {
+        alert('First name should contain alphabets!')
+      }
+      if(re2.test(pass))
+      {
+        count++
+      }
+      else
+      {
+        alert('Password should contain atlast one lowercase,one uppercase,one specail character one digit!')
+      }
+      if(pass==pass1)
+      {
+        count++
+      }
+      else
+      {
+        alert('Password Does not match')
+      }
+      if(re3.test(mail))
+      {
+        count++
+      }
+      else
+      {
+        alert('Email Invalid')
+      }
+    }
+  </script>
 </body>
 
 </html>
