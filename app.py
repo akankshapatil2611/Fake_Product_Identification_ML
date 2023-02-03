@@ -5,18 +5,20 @@ from PIL import Image
 import pytesseract
 import pandas as pd
 import pickle
-import rds_db as db
+#import rds_db as db
+import numpy as np
+import cv2
 from sklearn.feature_extraction.text import CountVectorizer
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Program Files/Tesseract-OCR/tesseract.exe'
 
 app = Flask(__name__)
-model = pickle.load(open("model.pkl", "rb"))
-
+#model = pickle.load(open("model.pkl", "rb"))
 
 @app.route("/")
 def Home():
-    return render_template("Registration.html")
+    #return render_template("Registration.html")
+    return render_template("index.html")
 
 @app.route("/textdetect")
 def text():
@@ -26,8 +28,11 @@ def text():
 def fetchData():
     if request.method == "POST":
         img = request.form['image']
-        im = Image.open(img)
-        text = pytesseract.image_to_string(im, lang = 'eng')
+        #im = Image.open(img)
+        #text = pytesseract.image_to_string(im, lang = 'eng')
+        image = cv2.imread(img)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        text = pytesseract.image_to_string(gray)
         print(text)
         file = pd.read_excel("ProductBrand_dataset.xls")
         output = str()
@@ -45,7 +50,8 @@ def fetchData():
     return render_template("index.html", prediction_text= "{}".format(output))
     #return jsonify(output)
 
-@app.route("/reviewtext")
+
+'''@app.route("/reviewtext")
 def reviewd():
     return render_template("ReviewDetection.html")
 
@@ -60,9 +66,9 @@ def reviewfetchData():
     print(m)
 
     #return render_template("ReviewDetection.html", prediction= "{}".format(m))
-    return jsonify(m)
+    return jsonify(m)'''
 
-@app.route('/login', methods=['post'])
+'''@app.route('/login', methods=['post'])
 def loginuser():
     name = request.form['name']
     passwd = request.form['passwd']
@@ -75,8 +81,6 @@ def loginuser():
         msg = "Login Successful"
         return render_template('main.html')
     
-    print(msg)
-    
 
 @app.route('/insert',methods = ['post'])
 def insert():
@@ -88,7 +92,7 @@ def insert():
         passwd = request.form['pass']
         cpasswd = request.form['cpass']
         db.insert_details(name,email,phone, passwd, cpasswd)
-        return render_template('Registration.html')
+        return render_template('Registration.html')'''
 
 if __name__ == "__main__":
     #http_server = WSGIServer(('', 5000), app)
